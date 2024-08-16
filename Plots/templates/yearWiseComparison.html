@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+{% block content %}
+
+
+{% if not line %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Year Wise Comparision</h2>
+                    <form id="exampleForm" action="/plots/yearWiseComparison/" method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="course_code">Select Course</label>
+                            <select class="form-control" id="course_code" name="course_code">
+                                {% for i in courseData_objects %}    
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="semester">Semester</label>
+                            <select class="form-control" id="semester" name="semester">
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </form>
+                    {% if messages %}
+                        <div class="container mt-3">
+                            {% for message in messages %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+
+<div class="container text-center mt-5">
+    <div class="row">
+        <div class="col mx-auto mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    {{ line | safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mx-auto">
+            <div class="card">
+                <div class="card-body text-center">
+                    {{ bar | safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}

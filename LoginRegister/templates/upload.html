@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center">CSV File Upload</h2>
+                    <form id="csvUploadForm" action="/upload_data/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="csvFile">year</label>
+                            <input type="text" class="form-control-file" id="year" name="year">
+                        </div>
+                        <div class="form-group">
+                            <label for="csvFile">semester</label>
+                            <input type="text" class="form-control-file" id="sem" name="semester">
+                        </div>
+                        <div class="form-group">
+                            <label for="csvFile">Choose CSV File</label>
+                            <input type="file" class="form-control-file" id="csvFile" name="csvFile" accept=".csv">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
